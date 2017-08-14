@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.iconBox{
+				width: 200px;
+				height: 200px;
+				border:5px dashed red;
+			}
+			.container{
+				display: flex;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>请选择您的头像</h1>
+		<div class='container'>
+			<input type="file"  id="selectFile" />
+			<div class='iconBox'></div>
+		</div>
+
+	</body>
+</html>
+<script type="text/javascript">
+	document.querySelector('input[type=file]').onchange = function (){
+//		console.log('123');
+		
+		// 创建文件读取对象
+		var reader = new FileReader();
+		
+		// 通过当前的file标签 获取选择的文件
+		console.log(this.files);
+		
+		// 调用该对象的方法读取文件 文件
+		// 读取文件是一个耗时操作 不一定什么时候读取完毕
+		reader.readAsDataURL(this.files[0]);
+		
+		// 添加事件
+		// 耗时操作 通过事件的方式进行注册 并且回调
+		reader.onload = function (){
+			// 使用读取完毕的文件
+			console.log(reader.result);
+			//使用返回的结果 即可
+			document.querySelector('.iconBox').style.background = 'url('+ reader.result+') no-repeat center/cover';
+		}
+		
+		
+
+	}
+</script>
